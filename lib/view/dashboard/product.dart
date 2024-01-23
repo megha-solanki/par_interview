@@ -12,6 +12,18 @@ class Product extends StatefulWidget {
 }
 
 class _ProductState extends State<Product> {
+  final scrollController = ScrollController();
+
+  void setScrollController(context) {
+    scrollController.addListener(() {
+      if (scrollController.position.atEdge) {
+        if (scrollController.position.pixels != 0) {
+         // BlocProvider.of<ProductCubit>(context).();
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

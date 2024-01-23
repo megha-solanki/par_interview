@@ -4,7 +4,6 @@ import 'package:par_interview/bloc/auth/login_cubit.dart';
 import 'package:par_interview/bloc/product/product_cubit.dart';
 import 'package:par_interview/constant/color_const.dart';
 import 'package:par_interview/view/login.dart';
-
 import 'view/dashboard/dash_bottom_navigaion.dart';
 
 void main() {
