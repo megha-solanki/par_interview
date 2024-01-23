@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:par_interview/bloc/auth/login_cubit.dart';
+import 'package:par_interview/bloc/home/home_cubit.dart';
 import 'package:par_interview/bloc/product/product_cubit.dart';
 import 'package:par_interview/constant/color_const.dart';
 import 'package:par_interview/view/login.dart';
@@ -27,9 +28,10 @@ class MyApp extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => AuthCubit()),
-          BlocProvider(create: (context) => ProductCubit())
+          BlocProvider(create: (context) => ProductCubit()),
+          BlocProvider(create: (context) => HomeCubit())
         ],
-        child: const Login(),
+        child: const DashBottomNavigationBar(),
       ),
     );
   }

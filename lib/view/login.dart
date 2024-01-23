@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,7 +39,6 @@ class _LoginState extends State<Login> {
                     },
                   ),
                 );
-                print('Authenticated successfully. Token: ${state.token}');
               } else if (state is AuthErrorState) {
                 print('Authentication error: ${state.error}');
               }
@@ -50,13 +48,11 @@ class _LoginState extends State<Login> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 70,
-                    ),
+                    SizedBox(height:MediaQuery.of(context).size.height*0.12),
                     const Text(
                       "Log in to your account",
                       style: TextStyle(
-                          fontSize: 21,
+                          fontSize: 22,
                           color: white,
                           fontWeight: FontWeight.w600),
                     ),
@@ -65,9 +61,7 @@ class _LoginState extends State<Login> {
                       "Welcome back! please enter your details.",
                       style: MyTextStyles.regular14(color: grey500),
                     ),
-                    const SizedBox(
-                      height: 25,
-                    ),
+                    SizedBox(height:MediaQuery.of(context).size.height*0.06),
                     CustomTextFormField(
                       label: "Email",
                       controller: txtEmail,
@@ -125,12 +119,10 @@ class _LoginState extends State<Login> {
                         )
                       ],
                     ),
-                    const SizedBox(
-                      height: 35,
-                    ),
+                    SizedBox(height:MediaQuery.of(context).size.height*0.06),
                     CustomButton(
                       label: state is AuthLoadingState
-                          ? const CircularProgressIndicator()
+                          ? const CircularProgressIndicator(color: white)
                           : Text(
                               "Log in",
                               style: MyTextStyles.semiBold15(color: white),
@@ -141,7 +133,7 @@ class _LoginState extends State<Login> {
                         context.read<AuthCubit>().login(email, password);
                       },
                     ),
-                    DesignConst.gap15,
+                    SizedBox(height:MediaQuery.of(context).size.height*0.03),
                     SizedBox(
                       height: 46,
                       child: ElevatedButton(
@@ -183,7 +175,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    DesignConst.gap12,
+                    SizedBox(height:MediaQuery.of(context).size.height*0.02),
                     SizedBox(
                       height: 46,
                       child: ElevatedButton(
@@ -225,7 +217,7 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 55),
+                     SizedBox(height:MediaQuery.of(context).size.height/8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
