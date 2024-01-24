@@ -1,17 +1,21 @@
-abstract class AuthState {}
+import 'package:par_interview/model/auth_model.dart';
 
-class AuthInitialState extends AuthState {}
-
-class AuthLoadingState extends AuthState {}
-
-class AuthSuccessState extends AuthState {
-  final String token;
-
-  AuthSuccessState(this.token);
+abstract class AuthState {
+  const AuthState();
 }
 
-class AuthErrorState extends AuthState {
-  final String error;
+class AuthInitial extends AuthState {
+}
 
-  AuthErrorState(this.error);
+class AuthLoading extends AuthState {
+}
+
+class AuthSuccess extends AuthState {
+  AuthModel authModel;
+  AuthSuccess({required this.authModel});
+}
+
+class AuthFailure extends AuthState {
+  String message;
+  AuthFailure(this.message);
 }

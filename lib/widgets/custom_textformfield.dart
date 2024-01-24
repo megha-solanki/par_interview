@@ -5,7 +5,6 @@ import 'package:par_interview/constant/textstyle_const.dart';
 import '../constant/color_const.dart';
 
 class CustomTextFormField extends StatelessWidget {
-
   final Function(String)? onChanged;
   final bool autoFocus;
   final String? hintText;
@@ -44,7 +43,8 @@ class CustomTextFormField extends StatelessWidget {
   final AutovalidateMode? autoValidateMode;
   final BoxConstraints? prefixIconConstraints;
 
-  const CustomTextFormField({super.key,
+  const CustomTextFormField({
+    super.key,
     this.onChanged,
     this.hintText,
     this.prefixText,
@@ -95,7 +95,6 @@ class CustomTextFormField extends StatelessWidget {
           if (label != null)
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
-
               child: Text(
                 "$label",
                 style: textStyle ?? MyTextStyles.regular13(color: white),
@@ -108,7 +107,7 @@ class CustomTextFormField extends StatelessWidget {
               onChanged: onChanged,
               autofillHints: autoVal != null ? [autoVal!] : [],
               initialValue: initVal,
-              cursorColor:white,
+              cursorColor: white,
               autofocus: autoFocus,
               enabled: isEnable,
               readOnly: readOnly,
@@ -136,7 +135,8 @@ class CustomTextFormField extends StatelessWidget {
                 isDense: true,
                 hintText: hintText ?? "",
                 alignLabelWithHint: true,
-                hintStyle: MyTextStyles.regular13(color: grey500,fontSize: 13.5),
+                hintStyle:
+                    MyTextStyles.regular13(color: grey500, fontSize: 13.5),
                 errorStyle: MyTextStyles.regular13(color: redAccent),
                 suffixIconConstraints: suffixIconConstraints,
                 contentPadding: EdgeInsets.only(
@@ -148,10 +148,8 @@ class CustomTextFormField extends StatelessWidget {
                 prefixIconConstraints: prefixIconConstraints,
                 prefixIcon: pWidget != null
                     ? Padding(
-                        padding:
-                            const EdgeInsets.only(left: 16.0, right: 9),
-                        child: pWidget
-                      )
+                        padding: const EdgeInsets.only(left: 16.0, right: 9),
+                        child: pWidget)
                     : null,
                 suffixIcon: sWidget != null
                     ? Padding(
@@ -170,8 +168,7 @@ class CustomTextFormField extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(radius ?? 6),
-                  borderSide:
-                      const BorderSide(width: 0.35, color: white),
+                  borderSide: const BorderSide(width: 0.35, color: white),
                 ),
                 disabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(radius ?? 6),
@@ -179,8 +176,7 @@ class CustomTextFormField extends StatelessWidget {
                 ),
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(radius ?? 6),
-                  borderSide:
-                      const BorderSide(width: 0.35, color: redAccent),
+                  borderSide: const BorderSide(width: 0.35, color: redAccent),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(radius ?? 6),

@@ -1,70 +1,51 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:par_interview/bloc/product/product_cubit.dart';
-import 'package:par_interview/constant/color_const.dart';
+
+import '../../bloc/product/component/product_card.dart';
+import '../../bloc/product/product_bloc.dart';
+import '../../bloc/product/product_event.dart';
 import '../../bloc/product/product_state.dart';
+import '../../model/product_model.dart';
+import '../../repository/product_repo.dart';
 
-class Product extends StatefulWidget {
+class Product extends StatelessWidget {
   const Product({super.key});
-
-  @override
-  State<Product> createState() => _ProductState();
-}
-
-class _ProductState extends State<Product> {
-  final scrollController = ScrollController();
-
-  void setScrollController(context) {
-    scrollController.addListener(() {
-      if (scrollController.position.atEdge) {
-        if (scrollController.position.pixels != 0) {
-         // BlocProvider.of<ProductCubit>(context).();
-        }
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: black,
-        title: const Text(
-          "Product",
-          style: TextStyle(color: white, fontSize: 18),
-        ),
-        centerTitle: true,
+        title: const Text("Product Pagination"),
       ),
-      body: BlocProvider<ProductCubit>(
-        create: (context) => ProductCubit(),
-        child: BlocBuilder(
-          builder: (BuildContext context, state) {
-            if (state is ProductInitialState) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is ProductLoadingState) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is ProductLoadedState) {
-              return ListView.builder(
-                itemCount: state.products.length,
-                itemBuilder: (context, index) {
-                  final product = state.products[index];
-                  return ListTile(
-                    title: Text(product.name),
-                    subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
-                  );
-                },
-              );
-            } else if (state is ProductErrorState) {
-              return Center(
-                child: Text('Error: ${state.error}'),
-              );
+      body: BlocProvider(
+        create: (context) =>
+            ProductBloc(productRepository: context.read<ProductRepository>())
+              ..add(FetchProductEvent()),
+        child: BlocBuilder<ProductBloc, ProductState>(
+          builder: (context, state) {
+            if (state is ProductLoadingState) {
+              return const Center(child: CupertinoActivityIndicator());
+            } else if (state is ProductSuccessState) {
+              List<Products> products = state.products;
+              return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: 0.75, crossAxisCount: 2),
+                  controller: context.read<ProductBloc>().scrollController,
+                  itemCount: context.read<ProductBloc>().isLoadingMore
+                      ? products.length + 1
+                      : products.length,
+                  itemBuilder: (context, index) {
+                    if (index >= products.length) {
+                      return const Center(child: CupertinoActivityIndicator());
+                    } else {
+                      return ProductCard(
+                        products: products[index],
+                      );
+                    }
+                  });
             } else {
-              return Container(); // Handle other states if needed
+              return const Center(child: Text("No Data"));
             }
           },
         ),

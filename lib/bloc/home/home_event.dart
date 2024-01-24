@@ -1,22 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 
-@immutable
-abstract class HomeState {}
-
-class HomeScreenInitial extends HomeState {}
-
-class HomeScreenLoading extends HomeState {}
-
-class HomeScreenInProgress extends HomeState {}
-
-class HomeScreenSuccess extends HomeState {
-  final String fileName;
-
-  HomeScreenSuccess(this.fileName);
+abstract class UploadEvent {
+  const UploadEvent();
 }
 
-class HomeScreenFailure extends HomeState {
-  final String errorMessageCode;
+class FileUploadEvent extends UploadEvent {
+  final FormData formData;
 
-  HomeScreenFailure(this.errorMessageCode);
+  FileUploadEvent({required this.formData});
 }

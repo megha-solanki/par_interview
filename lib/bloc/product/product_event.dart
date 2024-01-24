@@ -1,3 +1,5 @@
 abstract class ProductEvent {}
 
-class FetchProductsEvent extends ProductEvent {}
+class FetchProductEvent extends ProductEvent {}
+
+class LoadMoreEvent extends ProductEvent {}

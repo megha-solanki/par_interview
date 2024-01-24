@@ -1,17 +1,19 @@
-abstract class ProductState {}
+import '../../model/product_model.dart';
 
-class ProductInitialState extends ProductState {}
+abstract class ProductState {
+  List<Products> products;
 
-class ProductLoadingState extends ProductState {}
-
-class ProductLoadedState extends ProductState {
-  final List<dynamic> products;
-
-  ProductLoadedState(this.products);
+  ProductState(this.products);
 }
 
-class ProductErrorState extends ProductState {
-  final String error;
+class InitState extends ProductState {
+  InitState(super.products);
+}
 
-  ProductErrorState(this.error);
+class ProductLoadingState extends ProductState {
+  ProductLoadingState(super.products);
+}
+
+class ProductSuccessState extends ProductState {
+  ProductSuccessState({required products}) : super(products);
 }
